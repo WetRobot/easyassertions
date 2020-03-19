@@ -360,6 +360,7 @@ assert_has_length <- function(x, x.nm = NULL, required_length) {
 #'
 #' @param hi `[number]` (mandatory, no default)
 #' upper bound for `x`
+#' @importFrom data.table between
 assert_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
   if (is.null(x_nm)) {
     x_nm <- deparse(substitute(x))
@@ -379,6 +380,7 @@ assert_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
 }
 #' @rdname assertions
 #' @export
+#' @importFrom data.table between
 assert_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
   if (is.null(x_nm)) {
     x_nm <- deparse(substitute(x))
@@ -488,6 +490,7 @@ assert_is_gtzero <- function(x, x_nm = NULL) {
 #'
 #' lines between generated function definitions; by default 5 empty lines
 #' @export
+#' @importFrom data.table CJ setkeyv
 generate_assertions <- function(
   source_script = "R/assertions.R",
   target_script = "R/generated_assertions.R",
