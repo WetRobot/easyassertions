@@ -321,6 +321,49 @@ assert_is_data_table <- function(
 #' @export
 #' @param required_names `[character]` (mandatory, no default)
 #' column names that `x` MUST have
+assert_has_names <- function(
+  x,
+  x.nm = NULL,
+  required_names
+) {
+  if (is.null(x_nm)) {
+    x_nm <- deparse(substitute(x))
+  }
+  assert_is_character_nonNA_vector(required_names)
+  miss_nms <- setdiff(required_names, names(x))
+  if (length(miss_nms)) {
+    stop(deparse(x_nm), " did not have these required names: ",
+         deparse(miss_nms))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
+assert_has_only_names <- function(
+  x,
+  x.nm = NULL,
+  required_names
+) {
+  if (is.null(x_nm)) {
+    x_nm <- deparse(substitute(x))
+  }
+  assert_is_character_nonNA_vector(required_names)
+  miss_nms <- setdiff(required_names, names(x))
+  if (length(miss_nms)) {
+    stop(deparse(x_nm), " did not have these required names: ",
+         deparse(miss_nms))
+  }
+  extra_nms <- setdiff(names(x), required_names)
+  if (length(extra_nms)) {
+    stop(deparse(x_nm), " had unexpected names: ",
+         deparse(extra_nms))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
 assert_is_data_table_with_required_names <- function(
   x,
   x_nm = NULL,

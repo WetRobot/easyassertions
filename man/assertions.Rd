@@ -20,6 +20,8 @@
 \alias{assert_is_NULL}
 \alias{assert_is_list}
 \alias{assert_is_data_table}
+\alias{assert_has_names}
+\alias{assert_has_only_names}
 \alias{assert_is_data_table_with_required_names}
 \alias{assert_has_length}
 \alias{assert_is_between_inclusive}
@@ -177,6 +179,10 @@ assert_is_NULL(x, x_nm = NULL)
 assert_is_list(x, x_nm = NULL)
 
 assert_is_data_table(x, x_nm = NULL)
+
+assert_has_names(x, x.nm = NULL, required_names)
+
+assert_has_only_names(x, x.nm = NULL, required_names)
 
 assert_is_data_table_with_required_names(x, x_nm = NULL, required_names)
 

@@ -2,7 +2,9 @@
 
 export(assert_has_class)
 export(assert_has_length)
+export(assert_has_names)
 export(assert_has_one_of_classes)
+export(assert_has_only_names)
 export(assert_is_Date)
 export(assert_is_Date_atom)
 export(assert_is_Date_matrix)
