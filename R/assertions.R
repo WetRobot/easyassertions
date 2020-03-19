@@ -323,7 +323,7 @@ assert_is_data_table <- function(
 #' column names that `x` MUST have
 assert_has_names <- function(
   x,
-  x.nm = NULL,
+  x_nm = NULL,
   required_names
 ) {
   if (is.null(x_nm)) {
@@ -342,7 +342,7 @@ assert_has_names <- function(
 #' @export
 assert_has_only_names <- function(
   x,
-  x.nm = NULL,
+  x_nm = NULL,
   required_names
 ) {
   if (is.null(x_nm)) {

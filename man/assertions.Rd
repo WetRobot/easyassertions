@@ -180,9 +180,9 @@ assert_is_list(x, x_nm = NULL)
 
 assert_is_data_table(x, x_nm = NULL)
 
-assert_has_names(x, x.nm = NULL, required_names)
+assert_has_names(x, x_nm = NULL, required_names)
 
-assert_has_only_names(x, x.nm = NULL, required_names)
+assert_has_only_names(x, x_nm = NULL, required_names)
 
 assert_is_data_table_with_required_names(x, x_nm = NULL, required_names)
 
