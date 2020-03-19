@@ -33,7 +33,7 @@ raise_internal_error_if_not <- function(...) {
 #' pass.
 #' @name assertions
 #' @param x R object to be tested (mandatory, no default)
-#' @param x.nm `[NULL, character]` (optional, default `NULL`)
+#' @param x_nm `[NULL, character]` (optional, default `NULL`)
 #'
 #' the name of the object `x` to mention in possible error message.
 #' - `NULL`: taken as `deparse(substitute(x))`
@@ -343,7 +343,7 @@ assert_is_data_table_with_required_names <- function(
 #' @export
 #' @param required_length `[integer]` (mandatory, no default)
 #' `x` MUST be of this length
-assert_has_length <- function(x, x.nm = NULL, required_length) {
+assert_has_length <- function(x, x_nm = NULL, required_length) {
   if (is.null(x_nm)) {
     x_nm <- deparse(substitute(x))
   }
@@ -490,7 +490,7 @@ assert_is_gtzero <- function(x, x_nm = NULL) {
 #'
 #' lines between generated function definitions; by default 5 empty lines
 #' @export
-#' @importFrom data.table CJ setkeyv
+#' @importFrom data.table CJ setkeyv .SD
 generate_assertions <- function(
   source_script = "R/assertions.R",
   target_script = "R/generated_assertions.R",

@@ -2,6 +2,7 @@
 # easyassertions
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/WetRobot/easyassertions.svg?branch=master)](https://travis-ci.org/WetRobot/easyassertions)
 <!-- badges: end -->
 
 easyassertions enables you to write simple, one-line and one-function-call 

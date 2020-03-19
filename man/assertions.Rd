@@ -180,7 +180,7 @@ assert_is_data_table(x, x_nm = NULL)
 
 assert_is_data_table_with_required_names(x, x_nm = NULL, required_names)
 
-assert_has_length(x, x.nm = NULL, required_length)
+assert_has_length(x, x_nm = NULL, required_length)
 
 assert_is_between_inclusive(x, x_nm = NULL, lo, hi)
 
@@ -421,6 +421,14 @@ assert_is_number_nonNA_ltzero_vector(x, x_nm = NULL)
 \arguments{
 \item{x}{R object to be tested (mandatory, no default)}
 
+\item{x_nm}{\verb{[NULL, character]} (optional, default \code{NULL})
+
+the name of the object \code{x} to mention in possible error message.
+\itemize{
+\item \code{NULL}: taken as \code{deparse(substitute(x))}
+\item \code{character}: the name as a string
+}}
+
 \item{fun_nms}{\verb{[character]} (mandatory, no default)
 
 names of assertion funs to run}
@@ -445,14 +453,6 @@ character vector specifying classes of which \code{x} MUST have at least one}
 
 \item{required_names}{\verb{[character]} (mandatory, no default)
 column names that \code{x} MUST have}
-
-\item{x.nm}{\verb{[NULL, character]} (optional, default \code{NULL})
-
-the name of the object \code{x} to mention in possible error message.
-\itemize{
-\item \code{NULL}: taken as \code{deparse(substitute(x))}
-\item \code{character}: the name as a string
-}}
 
 \item{required_length}{\verb{[integer]} (mandatory, no default)
 \code{x} MUST be of this length}
