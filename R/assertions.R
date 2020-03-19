@@ -3,10 +3,20 @@
 
 
 
-# one assertion can test for
-# - class (data type)
-# - atom / vector / matrix / other (length + class)
-# - numeric value range (>= 0, >0, etc.)
+handle_x_nm_arg <- function(x_nm = NULL) {
+  stopifnot(
+    (is.character(x_nm) && length(x_nm) == 1L && !is.na(x_nm)) || is.null(x_nm)
+  )
+  if (is.null(x_nm)) {
+    x_nm <- paste0(
+      deparse(substitute(x, env = parent.frame(1L))),
+      collapse = ""
+    )
+  }
+  x_nm
+}
+
+
 
 
 
@@ -102,9 +112,7 @@ assert_has_class <- function(x, x_nm = NULL, required_class) {
     is.character(required_class),
     !is.na(required_class)
   )
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
 
   if (!inherits(x, required_class)) {
     stop("expected ", deparse(x_nm), " to have class ", deparse(required_class),
@@ -125,9 +133,7 @@ assert_has_one_of_classes <- function(x, x_nm = NULL, classes) {
     is.character(classes),
     !is.na(classes)
   )
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
 
   if (!inherits(x, classes)) {
     stop("expected ", deparse(x_nm), " to have one of classes ",
@@ -141,9 +147,7 @@ assert_has_one_of_classes <- function(x, x_nm = NULL, classes) {
 #' @rdname assertions
 #' @export
 assert_is_number <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.numeric(x)) {
     stop(deparse(x_nm), " is not a number")
   }
@@ -152,9 +156,7 @@ assert_is_number <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_character <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.character(x)) {
     stop(deparse(x_nm), " is not a character string object ",
          "(see ?\"character\")")
@@ -164,9 +166,7 @@ assert_is_character <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_double <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.double(x)) {
     stop(deparse(x_nm), " is not a double object (see ?\"double\")")
   }
@@ -175,9 +175,7 @@ assert_is_double <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_integer <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.integer(x)) {
     stop(deparse(x_nm), " is not integer (see ?\"integer\")")
   }
@@ -186,9 +184,7 @@ assert_is_integer <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_logical <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.logical(x)) {
     stop(deparse(x_nm), " is not logical (see ?\"logical\")")
   }
@@ -197,9 +193,7 @@ assert_is_logical <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_Date <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!inherits(x, "Date")) {
     stop(deparse(x_nm), " is not a Date object (see ?\"Date\")")
   }
@@ -209,9 +203,7 @@ assert_is_Date <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_atom <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (length(x) != 1) {
     stop(deparse(x_nm), " had length ", length(x), " but expected it to have ",
          "length 1")
@@ -222,9 +214,7 @@ assert_is_atom <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_vector <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.null(dim(x))) {
     stop(deparse(x_nm), " did not have NULL dim")
   }
@@ -240,9 +230,7 @@ assert_is_vector <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_matrix <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_has_class(x = x, x_nm = x_nm, required_class = "matrix")
   invisible(NULL)
 }
@@ -250,9 +238,7 @@ assert_is_matrix <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_data.frame <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_has_class(x = x, x_nm = x_nm, required_class = "data.frame")
   invisible(NULL)
 }
@@ -260,9 +246,7 @@ assert_is_data.frame <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_data.table <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_has_class(x = x, x_nm = x_nm, required_class = "data.table")
   invisible(NULL)
 }
@@ -270,9 +254,7 @@ assert_is_data.table <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 assert_is_nonNA <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   n_na <- sum(is.na(x))
   if (n_na > 0) {
     stop(deparse(x_nm), " should not have NA values; it had ", n_na,
@@ -287,9 +269,7 @@ assert_is_NULL <- function(
   x,
   x_nm = NULL
 ) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   if (!is.null(x)) {
     stop(deparse(x_nm), " should be NULL; it had class(es) ",
          deparse(class(x)))
@@ -299,9 +279,7 @@ assert_is_NULL <- function(
 #' @rdname assertions
 #' @export
 assert_is_list <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_has_class(x = x, x_nm = x_nm, required_class = "list")
 }
 
@@ -311,9 +289,7 @@ assert_is_data_table <- function(
   x,
   x_nm = NULL
 ) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_has_class(x = x, x_nm = x_nm, required_class = "data.table")
 }
 
@@ -326,9 +302,7 @@ assert_has_names <- function(
   x_nm = NULL,
   required_names
 ) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_character_nonNA_vector(required_names)
   miss_nms <- setdiff(required_names, names(x))
   if (length(miss_nms)) {
@@ -345,9 +319,7 @@ assert_has_only_names <- function(
   x_nm = NULL,
   required_names
 ) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_character_nonNA_vector(required_names)
   miss_nms <- setdiff(required_names, names(x))
   if (length(miss_nms)) {
@@ -369,9 +341,7 @@ assert_is_data_table_with_required_names <- function(
   x_nm = NULL,
   required_names
 ) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_data.table(x)
   assert_is_character_nonNA_vector(required_names)
   miss_nms <- setdiff(required_names, names(x))
@@ -387,9 +357,7 @@ assert_is_data_table_with_required_names <- function(
 #' @param required_length `[integer]` (mandatory, no default)
 #' `x` MUST be of this length
 assert_has_length <- function(x, x_nm = NULL, required_length) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_integer(required_length)
   if (length(x) != required_length) {
     stop(deparse(x_nm), " was not of length ", required_length)
@@ -405,9 +373,7 @@ assert_has_length <- function(x, x_nm = NULL, required_length) {
 #' upper bound for `x`
 #' @importFrom data.table between
 assert_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   stopifnot(
     length(lo) %in% c(1L, length(x)),
@@ -425,9 +391,7 @@ assert_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
 #' @export
 #' @importFrom data.table between
 assert_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   n_not_between <- sum(!data.table::between(
     x = x, lower = lo, upper = hi, incbounds = FALSE
@@ -440,9 +404,7 @@ assert_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
 #' @rdname assertions
 #' @export
 assert_is_gte <- function(x, x_nm = NULL, lo) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   n_not_pass <- sum(x < lo)
   if (n_not_pass > 0) {
@@ -452,9 +414,7 @@ assert_is_gte <- function(x, x_nm = NULL, lo) {
 #' @rdname assertions
 #' @export
 assert_is_gt <- function(x, x_nm = NULL, lo) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   n_not_pass <- sum(x <= lo)
   if (n_not_pass > 0) {
@@ -464,9 +424,7 @@ assert_is_gt <- function(x, x_nm = NULL, lo) {
 #' @rdname assertions
 #' @export
 assert_is_lte <- function(x, x_nm = NULL, hi) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   n_not_pass <- sum(x > hi)
   if (n_not_pass > 0) {
@@ -476,9 +434,7 @@ assert_is_lte <- function(x, x_nm = NULL, hi) {
 #' @rdname assertions
 #' @export
 assert_is_lt <- function(x, x_nm = NULL, hi) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_number(x)
   n_not_pass <- sum(x >= hi)
   if (n_not_pass > 0) {
@@ -488,33 +444,25 @@ assert_is_lt <- function(x, x_nm = NULL, hi) {
 #' @rdname assertions
 #' @export
 assert_is_ltezero <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_lte(x = x, x_nm = x_nm, hi = 0.0)
 }
 #' @rdname assertions
 #' @export
 assert_is_ltzero <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_lt(x = x, x_nm = x_nm, hi = 0.0)
 }
 #' @rdname assertions
 #' @export
 assert_is_gtezero <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_gte(x = x, x_nm = x_nm, lo = 0.0)
 }
 #' @rdname assertions
 #' @export
 assert_is_gtzero <- function(x, x_nm = NULL) {
-  if (is.null(x_nm)) {
-    x_nm <- deparse(substitute(x))
-  }
+  x_nm <- handle_x_nm_arg(x_nm)
   assert_is_gte(x = x, x_nm = x_nm, lo = 0.0)
 }
 
@@ -574,7 +522,11 @@ generate_assertions <- function(
   fun_definitions <- unlist(lapply(seq_along(fun_nms), function(i) {
     fun_nm <- fun_nms[i]
     def <- paste0(fun_nm, " <- function(x, x_nm = NULL) {")
-    def <- c(def, paste0("  ", setdiff(as.character(fun_nm_dt[i, ]), "")))
+    def <- c(
+      def,
+      "  x_nm <- handle_x_nm_arg(x_nm)",
+      paste0("  ", setdiff(as.character(fun_nm_dt[i, ]), ""))
+      )
     def <- c(def, "}", rep("", 1))
     def <- c(
       "#' @rdname assertions",
