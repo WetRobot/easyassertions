@@ -314,6 +314,40 @@ assert_has_names <- function(
 
 #' @rdname assertions
 #' @export
+assert_is_named <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  if (is.null(names(x))) {
+    stop(deparse(x_nm), " did not have names")
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
+#' @importFrom utils head
+assert_is_uniquely_named <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_named(x = x, x_nm = x_nm)
+  n_unique_names <- length(unique(names(x)))
+  n_x_elems <- length(x)
+  if (n_x_elems != n_unique_names) {
+    dup_nms <- unique(names(x)[duplicated(names(x))])
+    stop(deparse(x_nm), " did not have as many unique names as it has ",
+         "elements; it has ", n_x_elems, " elements and it had ",
+         n_unique_names, " unique names; first five duplicate names: ",
+         deparse(utils::head(dup_nms, 5)))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
 #' @importFrom utils head
 #' @param set `[vector]` (mandatory, no default)
 #'

@@ -21,6 +21,8 @@
 \alias{assert_is_list}
 \alias{assert_is_data_table}
 \alias{assert_has_names}
+\alias{assert_is_named}
+\alias{assert_is_uniquely_named}
 \alias{assert_atom_is_in_set}
 \alias{assert_vector_elems_are_in_set}
 \alias{assert_has_only_names}
@@ -183,6 +185,10 @@ assert_is_list(x, x_nm = NULL)
 assert_is_data_table(x, x_nm = NULL)
 
 assert_has_names(x, x_nm = NULL, required_names)
+
+assert_is_named(x, x_nm = NULL)
+
+assert_is_uniquely_named(x, x_nm = NULL)
 
 assert_atom_is_in_set(x, x_nm = NULL, set)
 
