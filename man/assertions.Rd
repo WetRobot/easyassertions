@@ -468,7 +468,7 @@ column names that \code{x} MUST have}
 
 \item{set}{\verb{[vector]} (mandatory, no default)
 
-vector (set, but uniqueness is not asserted) of allowd values}
+vector (set, but uniqueness is not asserted) of allowed values}
 
 \item{required_length}{\verb{[integer]} (mandatory, no default)
 \code{x} MUST be of this length}
