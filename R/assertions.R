@@ -314,6 +314,51 @@ assert_has_names <- function(
 
 #' @rdname assertions
 #' @export
+#' @importFrom utils head
+assert_atom_is_in_set <- function(
+  x,
+  x_nm = NULL,
+  set
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_atom(x = x, x_nm = x_nm)
+  raise_internal_error_if_not(
+    is.vector(set),
+    !is.list(set)
+  )
+  if (!x %in% set) {
+    stop(deparse(x_nm), " was not in set containing (first 10): ",
+         deparse(utils::head(set, 10)))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
+#' @importFrom utils head
+assert_vector_elems_are_in_set <- function(
+  x,
+  x_nm = NULL,
+  set
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_vector(x)
+  raise_internal_error_if_not(
+    is.vector(set),
+    !is.list(set)
+  )
+  bad_levels <- setdiff(x, set)
+  if (length(bad_levels) > 0) {
+    stop(deparse(x_nm), " had unallowed values (first 10): ",
+         deparse(utils::head(bad_levels, 10)), "; the following were allowed ",
+         "(first 10): ",
+         deparse(utils::head(set, 10)))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
 assert_has_only_names <- function(
   x,
   x_nm = NULL,
