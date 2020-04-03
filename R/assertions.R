@@ -315,6 +315,9 @@ assert_has_names <- function(
 #' @rdname assertions
 #' @export
 #' @importFrom utils head
+#' @param set `[vector]` (mandatory, no default)
+#'
+#' vector (set, but uniqueness is not asserted) of allowd values
 assert_atom_is_in_set <- function(
   x,
   x_nm = NULL,

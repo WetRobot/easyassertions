@@ -466,6 +466,10 @@ character vector specifying classes of which \code{x} MUST have at least one}
 \item{required_names}{\verb{[character]} (mandatory, no default)
 column names that \code{x} MUST have}
 
+\item{set}{\verb{[vector]} (mandatory, no default)
+
+vector (set, but uniqueness is not asserted) of allowd values}
+
 \item{required_length}{\verb{[integer]} (mandatory, no default)
 \code{x} MUST be of this length}
 
