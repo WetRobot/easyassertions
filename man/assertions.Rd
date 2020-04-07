@@ -2,6 +2,9 @@
 % Please edit documentation in R/assertions.R, R/generated_assertions.R
 \name{assertions}
 \alias{assertions}
+\alias{assert_dir_exists}
+\alias{assert_file_exists}
+\alias{assert_is_function}
 \alias{assert_is_one_of}
 \alias{assert_has_class}
 \alias{assert_has_one_of_classes}
@@ -157,6 +160,12 @@
 \alias{assert_is_number_nonNA_ltzero_vector}
 \title{Assertions}
 \usage{
+assert_dir_exists(x, x_nm = NULL)
+
+assert_file_exists(x, x_nm = NULL)
+
+assert_is_function(x, x_nm = NULL)
+
 assert_is_one_of(x, x_nm = NULL, fun_nms, funs_arg_list = NULL)
 
 assert_has_class(x, x_nm = NULL, required_class)

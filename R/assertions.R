@@ -49,6 +49,41 @@ raise_internal_error_if_not <- function(...) {
 #' - `NULL`: taken as `deparse(substitute(x))`
 #' - `character`: the name as a string
 
+
+
+#' @rdname assertions
+#' @export
+assert_dir_exists <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_character_nonNA_atom(x, x_nm)
+  if (!dir.exists(x)) {
+    stop("No such directory: ", deparse(x))
+  }
+  invisible(NULL)
+}
+
+
+#' @rdname assertions
+#' @export
+assert_file_exists <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_character_nonNA_atom(x, x_nm)
+  if (!file.exists(x)) {
+    stop("No such file: ", deparse(x))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_function <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  if (!is.function(x)) {
+    stop(deparse(x_nm), " was not a function")
+  }
+  invisible(NULL)
+}
+
 #' @rdname assertions
 #' @export
 #' @param fun_nms `[character]` (mandatory, no default)
