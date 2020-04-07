@@ -386,6 +386,57 @@ assert_is_double_nonNA_ltzero_vector <- function(x, x_nm = NULL) {
 
 #' @rdname assertions
 #' @export
+assert_is_factor_atom <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_atom(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_factor_matrix <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_matrix(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_factor_vector <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_vector(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_factor_nonNA_atom <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_nonNA(x = x, x_nm = x_nm)
+  assert_is_atom(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_factor_nonNA_matrix <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_nonNA(x = x, x_nm = x_nm)
+  assert_is_matrix(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_factor_nonNA_vector <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x = x, x_nm = x_nm)
+  assert_is_nonNA(x = x, x_nm = x_nm)
+  assert_is_vector(x = x, x_nm = x_nm)
+}
+
+#' @rdname assertions
+#' @export
 assert_is_integer_atom <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   assert_is_integer(x = x, x_nm = x_nm)

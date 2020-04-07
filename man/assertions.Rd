@@ -11,6 +11,8 @@
 \alias{assert_is_integer}
 \alias{assert_is_logical}
 \alias{assert_is_Date}
+\alias{assert_is_factor}
+\alias{assert_is_factor_with_levels}
 \alias{assert_is_atom}
 \alias{assert_is_vector}
 \alias{assert_is_matrix}
@@ -26,6 +28,7 @@
 \alias{assert_atom_is_in_set}
 \alias{assert_vector_elems_are_in_set}
 \alias{assert_has_only_names}
+\alias{assert_is_data.table_with_required_names}
 \alias{assert_is_data_table_with_required_names}
 \alias{assert_has_length}
 \alias{assert_is_between_inclusive}
@@ -80,6 +83,12 @@
 \alias{assert_is_double_nonNA_ltzero_atom}
 \alias{assert_is_double_nonNA_ltzero_matrix}
 \alias{assert_is_double_nonNA_ltzero_vector}
+\alias{assert_is_factor_atom}
+\alias{assert_is_factor_matrix}
+\alias{assert_is_factor_vector}
+\alias{assert_is_factor_nonNA_atom}
+\alias{assert_is_factor_nonNA_matrix}
+\alias{assert_is_factor_nonNA_vector}
 \alias{assert_is_integer_atom}
 \alias{assert_is_integer_matrix}
 \alias{assert_is_integer_vector}
@@ -166,6 +175,10 @@ assert_is_logical(x, x_nm = NULL)
 
 assert_is_Date(x, x_nm = NULL)
 
+assert_is_factor(x, x_nm = NULL)
+
+assert_is_factor_with_levels(x, x_nm = NULL, expected_levels)
+
 assert_is_atom(x, x_nm = NULL)
 
 assert_is_vector(x, x_nm = NULL)
@@ -195,6 +208,8 @@ assert_atom_is_in_set(x, x_nm = NULL, set)
 assert_vector_elems_are_in_set(x, x_nm = NULL, set)
 
 assert_has_only_names(x, x_nm = NULL, required_names)
+
+assert_is_data.table_with_required_names(x, x_nm = NULL, required_names)
 
 assert_is_data_table_with_required_names(x, x_nm = NULL, required_names)
 
@@ -303,6 +318,18 @@ assert_is_double_nonNA_ltzero_atom(x, x_nm = NULL)
 assert_is_double_nonNA_ltzero_matrix(x, x_nm = NULL)
 
 assert_is_double_nonNA_ltzero_vector(x, x_nm = NULL)
+
+assert_is_factor_atom(x, x_nm = NULL)
+
+assert_is_factor_matrix(x, x_nm = NULL)
+
+assert_is_factor_vector(x, x_nm = NULL)
+
+assert_is_factor_nonNA_atom(x, x_nm = NULL)
+
+assert_is_factor_nonNA_matrix(x, x_nm = NULL)
+
+assert_is_factor_nonNA_vector(x, x_nm = NULL)
 
 assert_is_integer_atom(x, x_nm = NULL)
 

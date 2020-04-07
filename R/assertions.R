@@ -202,6 +202,39 @@ assert_is_Date <- function(x, x_nm = NULL) {
 
 #' @rdname assertions
 #' @export
+assert_is_factor <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  if (!inherits(x, "factor")) {
+    stop(deparse(x_nm), " is not a factor object (see ?\"factor\")")
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
+#' @importFrom utils head
+assert_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_is_factor(x, x_nm)
+  assert_is_character_nonNA_vector(expected_levels)
+  levels <- levels(x)
+  extra_levels <- setdiff(levels, expected_levels)
+  if (length(extra_levels) > 0) {
+    stop("factor ", deparse(x_nm), " had unexpected levels; ",
+         "first five extra levels: ",
+         deparse(utils::head(extra_levels, 5L)))
+  }
+  miss_levels <- setdiff(expected_levels, levels)
+  if (length(miss_levels) > 0) {
+    stop("factor ", deparse(x_nm), " did not have all expected levels; ",
+         "first five missing levels: ",
+         deparse(utils::head(miss_levels, 5L)))
+  }
+  invisible(NULL)
+}
+
+#' @rdname assertions
+#' @export
 assert_is_atom <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   if (length(x) != 1) {
@@ -418,6 +451,20 @@ assert_has_only_names <- function(
 
 #' @rdname assertions
 #' @export
+assert_is_data.table_with_required_names <- function(
+  x,
+  x_nm = NULL,
+  required_names
+) {
+  assert_is_data_table_with_required_names(
+    x = x,
+    x_nm = x_nm,
+    required_names = required_names
+  )
+}
+
+#' @rdname assertions
+#' @export
 assert_is_data_table_with_required_names <- function(
   x,
   x_nm = NULL,
@@ -574,7 +621,7 @@ generate_assertions <- function(
   lines <- pad
 
   levels <- list(
-    c("double", "number", "integer", "Date", "character", "logical"),
+    c("double", "number", "integer", "Date", "character", "logical",  "factor"),
     "_",
     c("nonNA", ""),
     "_",
@@ -585,8 +632,9 @@ generate_assertions <- function(
 
   fun_nm_dt <- do.call(data.table::CJ, levels)
   data.table::setkeyv(fun_nm_dt, names(fun_nm_dt))
+  non_number_types <- c("character", "logical", "Date", "factor")
   fun_nm_dt <- fun_nm_dt[
-    !(fun_nm_dt[["V1"]] %in% c("character", "logical", "Date") &
+    !(fun_nm_dt[["V1"]] %in% non_number_types &
         fun_nm_dt[["V5"]] != ""),
     ]
   fun_nms <- do.call(paste0, fun_nm_dt)
