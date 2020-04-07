@@ -511,6 +511,12 @@ string specifying class that \code{x} MUST have}
 
 character vector specifying classes of which \code{x} MUST have at least one}
 
+\item{expected_levels}{\verb{[character]} (mandatory, no default)
+
+exact character string vector of levels that \code{x} must have; i.e.
+\code{levels(x)} and \code{expected_levels} must be the same set and they must be
+in the same order}
+
 \item{required_names}{\verb{[character]} (mandatory, no default)
 column names that \code{x} MUST have}
 

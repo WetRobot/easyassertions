@@ -248,6 +248,11 @@ assert_is_factor <- function(x, x_nm = NULL) {
 #' @rdname assertions
 #' @export
 #' @importFrom utils head
+#' @param expected_levels `[character]` (mandatory, no default)
+#'
+#' exact character string vector of levels that `x` must have; i.e.
+#' `levels(x)` and `expected_levels` must be the same set and they must be
+#' in the same order
 assert_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels) {
   x_nm <- handle_x_nm_arg(x_nm)
   assert_is_factor(x, x_nm)
@@ -264,6 +269,12 @@ assert_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels) {
     stop("factor ", deparse(x_nm), " did not have all expected levels; ",
          "first five missing levels: ",
          deparse(utils::head(miss_levels, 5L)))
+  }
+  if (!identical(as.character(levels), as.character(expected_levels))) {
+    stop("factor ", deparse(x_nm), " levels were not in the expected order; ",
+         "first five levels: ", deparse(utils::head(levels, 5L)),
+         "first five expected levels: ",
+         deparse(utils::head(expected_levels, 5L)))
   }
   invisible(NULL)
 }
@@ -721,7 +732,21 @@ generate_assertions <- function(
   writeLines(text = lines, con = target_script)
   invisible(NULL)
 }
-generate_assertions()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
