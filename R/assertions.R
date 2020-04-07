@@ -353,6 +353,22 @@ assert_is_list <- function(x, x_nm = NULL) {
 
 #' @rdname assertions
 #' @export
+assert_is_named_list <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_has_class(x = x, x_nm = x_nm, required_class = "list")
+  assert_is_named(x, x_nm)
+}
+
+#' @rdname assertions
+#' @export
+assert_is_uniquely_named_list <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_has_class(x = x, x_nm = x_nm, required_class = "list")
+  assert_is_uniquely_named(x, x_nm)
+}
+
+#' @rdname assertions
+#' @export
 assert_is_data_table <- function(
   x,
   x_nm = NULL

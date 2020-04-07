@@ -24,6 +24,8 @@
 \alias{assert_is_nonNA}
 \alias{assert_is_NULL}
 \alias{assert_is_list}
+\alias{assert_is_named_list}
+\alias{assert_is_uniquely_named_list}
 \alias{assert_is_data_table}
 \alias{assert_has_names}
 \alias{assert_is_named}
@@ -203,6 +205,10 @@ assert_is_nonNA(x, x_nm = NULL)
 assert_is_NULL(x, x_nm = NULL)
 
 assert_is_list(x, x_nm = NULL)
+
+assert_is_named_list(x, x_nm = NULL)
+
+assert_is_uniquely_named_list(x, x_nm = NULL)
 
 assert_is_data_table(x, x_nm = NULL)
 
