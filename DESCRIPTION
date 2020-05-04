@@ -1,7 +1,7 @@
 Package: easyassertions
 Type: Package
 Title: Assert Variable Metadata
-Version: 0.2.1
+Version: 0.2.2
 Author: Joonas Miettinen
 Maintainer: Joonas Miettinen <joonas.miettinen@cancer.fi>
 Description: Enables easy assertions of e.g. function arguments.

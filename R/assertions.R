@@ -390,6 +390,51 @@ assert_is_data_table <- function(
 
 #' @rdname assertions
 #' @export
+assert_is_call <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_has_class(x = x, x_nm = x_nm, required_class = "call")
+}
+
+#' @rdname assertions
+#' @export
+assert_is_name <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_has_class(x = x, x_nm = x_nm, required_class = "name")
+}
+
+#' @rdname assertions
+#' @export
+assert_is_expression <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  assert_has_class(x = x, x_nm = x_nm, required_class = "expression")
+}
+
+#' @rdname assertions
+#' @export
+assert_is_language_object <- function(
+  x,
+  x_nm = NULL
+) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  if (!is.language(x)) {
+    stop(deparse(x_nm), " was not a language object; it had class(es) ",
+         deparse(class(x)), "; ",
+         "see ?is.language")
+  }
+  return(invisible(NULL))
+}
+
+#' @rdname assertions
+#' @export
 #' @param required_names `[character]` (mandatory, no default)
 #' column names that `x` MUST have
 assert_has_names <- function(

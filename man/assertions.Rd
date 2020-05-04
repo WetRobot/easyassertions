@@ -27,6 +27,10 @@
 \alias{assert_is_named_list}
 \alias{assert_is_uniquely_named_list}
 \alias{assert_is_data_table}
+\alias{assert_is_call}
+\alias{assert_is_name}
+\alias{assert_is_expression}
+\alias{assert_is_language_object}
 \alias{assert_has_names}
 \alias{assert_is_named}
 \alias{assert_is_uniquely_named}
@@ -211,6 +215,14 @@ assert_is_named_list(x, x_nm = NULL)
 assert_is_uniquely_named_list(x, x_nm = NULL)
 
 assert_is_data_table(x, x_nm = NULL)
+
+assert_is_call(x, x_nm = NULL)
+
+assert_is_name(x, x_nm = NULL)
+
+assert_is_expression(x, x_nm = NULL)
+
+assert_is_language_object(x, x_nm = NULL)
 
 assert_has_names(x, x_nm = NULL, required_names)
 
