@@ -6,8 +6,10 @@
 #' @description
 #' `dbc` is designed to aid writing functions under the design by contract
 #' philosophy, where function inputs and outputs are programmatically
-#' asserted to adhere to specifications. `dbc` offers the following families
-#' of functions:
+#' asserted to adhere to specifications.
+#'
+#' @details
+#' `dbc` offers the following families of functions:
 #'
 #' - `is_`: e.g. `is_integer_atom`; returns `TRUE` / `FALSE`
 #' - `report_whether_`: e.g. `report_whether_integer_atom`; returns a
@@ -65,5 +67,33 @@
 #' }
 #' ```
 #'
+#' `dbc` contains a plethora of (automatically generated) functions to reduce
+#' repetition, improve readability, and make writing checks easier (they are
+#' easy to write when you have auto-suggestions on your IDE, and start writing
+#' e.g. `assert_prod_input_number` and get a number of suggestions). These are
+#' recommended when they can be used. When not, use `report_on_tests` to
+#' create your own reports, and pass its output to one of
+#'
+#' - `signal_user_input_report`,
+#' - `signal_prod_input_report`,
+#' - `signal_dev_input_report`,
+#' - `signal_prod_output_report`,
+#' - `signal_dev_output_report`,
+#' - `signal_prod_interim_report`, and
+#' - `signal_dev_interim_report`
+#'
+#' e.g.
+#'
+#' ```
+#' my_fun <- function(x) {
+#'   signal_user_input_report(
+#'     report_on_tests(
+#'       tests = list(x %in% 1:5),
+#'       fail_messages = paste0("expected x to be in 1:5, but it was ", x)
+#'     )
+#'   )
+#' }
+#' ```
+NULL
 
 
