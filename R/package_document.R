@@ -1,0 +1,69 @@
+
+
+#' @name dbc
+#' @docType package
+#' @title dbc: Functions To Aid Design By Contract
+#' @description
+#' `dbc` is designed to aid writing functions under the design by contract
+#' philosophy, where function inputs and outputs are programmatically
+#' asserted to adhere to specifications. `dbc` offers the following families
+#' of functions:
+#'
+#' - `is_`: e.g. `is_integer_atom`; returns `TRUE` / `FALSE`
+#' - `report_whether_`: e.g. `report_whether_integer_atom`; returns a
+#'   `data.frame` with columns `test_name`, `test_result`, and `message`;
+#'   failed test will have an associated error message
+#' - `check_user_input_`: e.g. `check_user_input_is_integer_atom`;
+#'   these specifically check the values of function arguments supplied by the
+#'   user and should not be used for other purposes; they emit
+#'   a more user-friendly error so the user knows to adjust what they supply
+#'   to the function; you don't want to use these functions in internal
+#'   functions
+#' - `assert_prod_input_`: same as `assert_user_input`, but intended to check
+#'   inputs of functions when the user has no direct influence on the inputs;
+#'   these functions emit an error useful for debugging and direct the user
+#'   to report the error
+#' - `assert_dev_input_`: same as `assert_input_`, but only intended to be
+#'   executed during development / unit testing; in production these assertions
+#'   are not executed
+#' - `assert_prod_output_`: same as `assert_prod_input_`, but checks function
+#'   output
+#' - `assert_dev_output_`: same as `assert_dev_input_`, but checks function
+#'   output
+#' - `assert_prod_interim_`: same as `assert_prod_input_`, but intended to
+#'   check interim results in your function
+#' - `assert_dev_interim_`: same as `assert_prod_interim_`, but only executed
+#'   in dev mode
+#'
+#' `assert_dev_input_` and `assert_dev_output_` families assume that the
+#' functions are NOT called in development mode by default; they are executed
+#' if and only if `getOption("dbc_mode") == "dev"`.
+#'
+#' In summary, `assert_` functions are intended to check that something has
+#' not happened which should not happen (something is wrong with the function),
+#' `is_` functions return logical values, `report_whether_` return reports
+#' which can be used in more customised checking, and `check_user_input_`
+#' functions verify inputs given by the user. `check_user_input_` cannot know
+#' if it is in fact checking inputs not directly given by the user, i.e.
+#' the error messages will be poor if a function intended for the user is also
+#' used internally. To this end it is recommended to write a separate
+#' internal function and a separate function exposed to the user, which only
+#' wraps around the internal function. E.g.
+#'
+#' ```
+#' # internal function
+#' __my_fun <- function(x) {
+#'   assert_prod_input_number(x)
+#'   output <- x ^ 2
+#'   assert_prod_output_number(x)
+#'   return(output)
+#' }
+#' # function exposed to user
+#' my_fun <- function(x) {
+#'   assert_user_input_number(x)
+#'   __my_fun(x = x)
+#' }
+#' ```
+#'
+
+
