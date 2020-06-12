@@ -725,7 +725,7 @@ report_whether_is_gte <- function(x, x_nm = NULL, lo) {
 #' @export
 report_whether_is_gt <- function(x, x_nm = NULL, lo) {
   x_nm <- handle_x_nm_arg(x_nm)
-  report_whether_is_number(x)
+  raise_internal_error_if_not(is.numeric(x))
   n_not_pass <- sum(x <= lo)
   report_df <- tests_to_report(
     tests = "n_not_pass == 0L",
@@ -739,7 +739,7 @@ report_whether_is_gt <- function(x, x_nm = NULL, lo) {
 #' @export
 report_whether_is_lte <- function(x, x_nm = NULL, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
-  report_whether_is_number(x)
+  raise_internal_error_if_not(is.numeric(x))
   n_not_pass <- sum(x > hi)
   report_df <- tests_to_report(
     tests = "n_not_pass == 0L",
@@ -753,7 +753,7 @@ report_whether_is_lte <- function(x, x_nm = NULL, hi) {
 #' @export
 report_whether_is_lt <- function(x, x_nm = NULL, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
-  report_whether_is_number(x)
+  raise_internal_error_if_not(is.numeric(x))
   n_not_pass <- sum(x >= hi)
   report_df <- tests_to_report(
     tests = "n_not_pass == 0L",
@@ -767,6 +767,7 @@ report_whether_is_lt <- function(x, x_nm = NULL, hi) {
 #' @export
 report_whether_is_ltezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
+  raise_internal_error_if_not(is.numeric(x))
   report_df <- report_whether_is_lte(x = x, x_nm = x_nm, hi = 0.0)
   return(report_df)
 }
@@ -774,6 +775,7 @@ report_whether_is_ltezero <- function(x, x_nm = NULL) {
 #' @export
 report_whether_is_ltzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
+  raise_internal_error_if_not(is.numeric(x))
   report_df <- report_whether_is_lt(x = x, x_nm = x_nm, hi = 0.0)
   return(report_df)
 }
@@ -781,6 +783,7 @@ report_whether_is_ltzero <- function(x, x_nm = NULL) {
 #' @export
 report_whether_is_gtezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
+  raise_internal_error_if_not(is.numeric(x))
   report_df <- report_whether_is_gte(x = x, x_nm = x_nm, lo = 0.0)
   return(report_df)
 }
@@ -788,6 +791,7 @@ report_whether_is_gtezero <- function(x, x_nm = NULL) {
 #' @export
 report_whether_is_gtzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
+  raise_internal_error_if_not(is.numeric(x))
   report_df <- report_whether_is_gte(x = x, x_nm = x_nm, lo = 0.0)
   return(report_df)
 }
