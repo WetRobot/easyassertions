@@ -11,11 +11,11 @@
 #' @details
 #' `dbc` offers the following families of functions:
 #'
-#' - `is_`: e.g. `is_integer_atom`; returns `TRUE` / `FALSE`
-#' - `report_whether_`: e.g. `report_whether_integer_atom`; returns a
-#'   `data.frame` with columns `test_name`, `test_result`, and `message`;
+#' - `test`: e.g. `test_is_integer_atom`; returns `TRUE` / `FALSE`
+#' - `report_`: e.g. `report_is_integer_atom`; returns a
+#'   `data.frame` with columns `test`, `result`, `pass`, and `message`;
 #'   failed test will have an associated error message
-#' - `check_user_input_`: e.g. `check_user_input_is_integer_atom`;
+#' - `assert_user_input_`: e.g. `assert_user_input_is_integer_atom`;
 #'   these specifically check the values of function arguments supplied by the
 #'   user and should not be used for other purposes; they emit
 #'   a more user-friendly error so the user knows to adjust what they supply
@@ -43,9 +43,9 @@
 #'
 #' In summary, `assert_` functions are intended to check that something has
 #' not happened which should not happen (something is wrong with the function),
-#' `is_` functions return logical values, `report_whether_` return reports
-#' which can be used in more customised checking, and `check_user_input_`
-#' functions verify inputs given by the user. `check_user_input_` cannot know
+#' `test_` functions return logical values, `report_` return reports
+#' which can be used in more customised checking, and `assert_user_input_`
+#' functions verify inputs given by the user. `assert_user_input_` cannot know
 #' if it is in fact checking inputs not directly given by the user, i.e.
 #' the error messages will be poor if a function intended for the user is also
 #' used internally. To this end it is recommended to write a separate
@@ -70,7 +70,7 @@
 #' `dbc` contains a plethora of (automatically generated) functions to reduce
 #' repetition, improve readability, and make writing checks easier (they are
 #' easy to write when you have auto-suggestions on your IDE, and start writing
-#' e.g. `assert_prod_input_number` and get a number of suggestions). These are
+#' e.g. `assert_prod_input_` and get a number of suggestions). These are
 #' recommended when they can be used. When not, use `report_on_tests` to
 #' create your own reports, and pass its output to one of
 #'
@@ -88,7 +88,7 @@
 #' my_fun <- function(x) {
 #'   signal_user_input_report(
 #'     report_on_tests(
-#'       tests = list(x %in% 1:5),
+#'       tests = "x %in% 1:5",
 #'       fail_messages = paste0("expected x to be in 1:5, but it was ", x)
 #'     )
 #'   )

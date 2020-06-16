@@ -1,65 +1,6 @@
 
 
 
-tests_to_report <- function(
-  tests,
-  fail_messages = "test was not TRUE: %%test%%",
-  pass_messages = "test was TRUE: %%test%%",
-  env = parent.frame(1L)
-) {
-  stopifnot(
-    is.character(tests),
-    length(tests) > 0L,
-    !is.na(tests),
-
-    is.character(fail_messages),
-    length(fail_messages) %in% c(1L, length(tests)),
-
-    is.character(pass_messages),
-    length(pass_messages) %in% c(1L, length(tests)),
-
-    is.environment(env)
-  )
-
-  if (length(fail_messages) == 1L) {
-    fail_messages <- rep(fail_messages, length(tests))
-  }
-  fail_messages[is.na(fail_messages)] <- paste0(
-    "test failed: ", tests[is.na(fail_messages)]
-  )
-  if (length(pass_messages) == 1L) {
-    pass_messages <- rep(pass_messages, length(tests))
-  }
-  pass_messages[is.na(pass_messages)] <- paste0(
-    "test passed: ", tests[is.na(pass_messages)]
-  )
-
-  eval_env <- new.env(parent = env)
-  test_pos_set <- seq_along(tests)
-  do.call(rbind, lapply(test_pos_set, function(test_pos) {
-    test_string <- tests[test_pos]
-    test_expr <- parse(text = test_string)[[1L]]
-
-    result <- withCallingHandlers(
-      eval(test_expr, envir = eval_env),
-      error = function(e) paste0("ERROR: ", e[["message"]], collapse = "")
-    )
-
-    df <- data.frame(
-      test = test_string,
-      result = result,
-      pass = isTRUE(all.equal(result, TRUE))
-    )
-    if (df[["pass"]]) {
-      df[["message"]] <- interpolate(pass_messages[test_pos], env = eval_env)
-    } else {
-      df[["message"]] <- interpolate(fail_messages[test_pos], env = eval_env)
-    }
-    df[["message"]] <- gsub("\\Q%%test%%\\E", df[["test"]], df[["message"]])
-    df[]
-  }))
-}
-
 
 
 #' @title Assertions

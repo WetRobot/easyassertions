@@ -5,9 +5,9 @@
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_atom_is_in_set <- function(x, x_nm = NULL, set) {
+report_atom_is_in_set <- function(x, x_nm = NULL, set) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -31,13 +31,13 @@ report_whether_atom_is_in_set <- function(x, x_nm = NULL, set) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_dir_exists <- function(x, x_nm = NULL) {
+report_dir_exists <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_character_nonNA_vector(x)", "length(bad_dirs <- x[!file.exist(x)]) == 0L" )
+    c("assert_is_character_nonNA_vector(x)", "length(bad_dirs <- x[!dir.exists(x)]) == 0L" )
   )
   fail_msg_set <- c(
     c("%%result%%", "no such directory/directories: ${bad_dirs}")
@@ -57,13 +57,13 @@ report_whether_dir_exists <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_file_exists <- function(x, x_nm = NULL) {
+report_file_exists <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_character_nonNA_vector(x)", "length(bad_files <- x[!file.exist(x)]) == 0L" )
+    c("assert_is_character_nonNA_vector(x)", "length(bad_files <- x[!file.exists(x)]) == 0L" )
   )
   fail_msg_set <- c(
     c("%%result%%", "no such file(s): ${bad_files}")
@@ -83,9 +83,9 @@ report_whether_file_exists <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_has_class <- function(x, x_nm = NULL, required_class) {
+report_has_class <- function(x, x_nm = NULL, required_class) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -109,9 +109,9 @@ report_whether_has_class <- function(x, x_nm = NULL, required_class) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_has_length <- function(x, x_nm = NULL, expected_length) {
+report_has_length <- function(x, x_nm = NULL, expected_length) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -135,9 +135,9 @@ report_whether_has_length <- function(x, x_nm = NULL, expected_length) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_has_names <- function(x, x_nm = NULL, required_names) {
+report_has_names <- function(x, x_nm = NULL, required_names) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -161,9 +161,9 @@ report_whether_has_names <- function(x, x_nm = NULL, required_names) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_has_one_of_classes <- function(x, x_nm = NULL, classes) {
+report_has_one_of_classes <- function(x, x_nm = NULL, classes) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -187,9 +187,9 @@ report_whether_has_one_of_classes <- function(x, x_nm = NULL, classes) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_has_only_names <- function(x, x_nm = NULL, required_names) {
+report_has_only_names <- function(x, x_nm = NULL, required_names) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -213,9 +213,9 @@ report_whether_has_only_names <- function(x, x_nm = NULL, required_names) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_inherits <- function(x, x_nm = NULL, required_class) {
+report_inherits <- function(x, x_nm = NULL, required_class) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -239,9 +239,9 @@ report_whether_inherits <- function(x, x_nm = NULL, required_class) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_atom <- function(x, x_nm = NULL) {
+report_is_atom <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -265,9 +265,9 @@ report_whether_is_atom <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
+report_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -291,9 +291,9 @@ report_whether_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
+report_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -317,9 +317,9 @@ report_whether_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_character <- function(x, x_nm = NULL) {
+report_is_character <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -343,9 +343,9 @@ report_whether_is_character <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data.frame <- function(x, x_nm = NULL) {
+report_is_data.frame <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -369,9 +369,9 @@ report_whether_is_data.frame <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data.frame_with_required_names <- function(x, x_nm = NULL, required_names) {
+report_is_data.frame_with_required_names <- function(x, x_nm = NULL, required_names) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -395,9 +395,9 @@ report_whether_is_data.frame_with_required_names <- function(x, x_nm = NULL, req
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data.table <- function(x, x_nm = NULL) {
+report_is_data.table <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -421,9 +421,9 @@ report_whether_is_data.table <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data.table_with_required_names <- function(x, x_nm = NULL, required_names) {
+report_is_data.table_with_required_names <- function(x, x_nm = NULL, required_names) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -447,9 +447,9 @@ report_whether_is_data.table_with_required_names <- function(x, x_nm = NULL, req
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data_table <- function(x, x_nm = NULL) {
+report_is_data_table <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -473,9 +473,9 @@ report_whether_is_data_table <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_data_table_with_required_names <- function(x, x_nm = NULL, required_names) {
+report_is_data_table_with_required_names <- function(x, x_nm = NULL, required_names) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -499,9 +499,9 @@ report_whether_is_data_table_with_required_names <- function(x, x_nm = NULL, req
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_Date <- function(x, x_nm = NULL) {
+report_is_Date <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -525,9 +525,9 @@ report_whether_is_Date <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_double <- function(x, x_nm = NULL) {
+report_is_double <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -551,9 +551,9 @@ report_whether_is_double <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_environment <- function(x, x_nm = NULL) {
+report_is_environment <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -577,9 +577,9 @@ report_whether_is_environment <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_factor <- function(x, x_nm = NULL) {
+report_is_factor <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -603,9 +603,9 @@ report_whether_is_factor <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels) {
+report_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -629,9 +629,9 @@ report_whether_is_factor_with_levels <- function(x, x_nm = NULL, expected_levels
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_function <- function(x, x_nm = NULL) {
+report_is_function <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -655,9 +655,9 @@ report_whether_is_function <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_gt <- function(x, x_nm = NULL, lo) {
+report_is_gt <- function(x, x_nm = NULL, lo) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -681,9 +681,9 @@ report_whether_is_gt <- function(x, x_nm = NULL, lo) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_gte <- function(x, x_nm = NULL, lo) {
+report_is_gte <- function(x, x_nm = NULL, lo) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -707,9 +707,9 @@ report_whether_is_gte <- function(x, x_nm = NULL, lo) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_gtezero <- function(x, x_nm = NULL) {
+report_is_gtezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -733,9 +733,9 @@ report_whether_is_gtezero <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_gtzero <- function(x, x_nm = NULL) {
+report_is_gtzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -759,9 +759,9 @@ report_whether_is_gtzero <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_integer <- function(x, x_nm = NULL) {
+report_is_integer <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -785,9 +785,9 @@ report_whether_is_integer <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_list <- function(x, x_nm = NULL) {
+report_is_list <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -811,9 +811,9 @@ report_whether_is_list <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_logical <- function(x, x_nm = NULL) {
+report_is_logical <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -837,9 +837,9 @@ report_whether_is_logical <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_lt <- function(x, x_nm = NULL, lo, hi) {
+report_is_lt <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -863,9 +863,9 @@ report_whether_is_lt <- function(x, x_nm = NULL, lo, hi) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_lte <- function(x, x_nm = NULL, hi) {
+report_is_lte <- function(x, x_nm = NULL, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -889,9 +889,9 @@ report_whether_is_lte <- function(x, x_nm = NULL, hi) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_ltezero <- function(x, x_nm = NULL) {
+report_is_ltezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -915,9 +915,9 @@ report_whether_is_ltezero <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_ltzero <- function(x, x_nm = NULL) {
+report_is_ltzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -941,9 +941,9 @@ report_whether_is_ltzero <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_matrix <- function(x, x_nm = NULL) {
+report_is_matrix <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -967,9 +967,9 @@ report_whether_is_matrix <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_named <- function(x, x_nm = NULL) {
+report_is_named <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -993,9 +993,9 @@ report_whether_is_named <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_named_list <- function(x, x_nm = NULL) {
+report_is_named_list <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1019,9 +1019,9 @@ report_whether_is_named_list <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_nonNA <- function(x, x_nm = NULL) {
+report_is_nonNA <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1045,9 +1045,9 @@ report_whether_is_nonNA <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_null <- function(x, x_nm = NULL) {
+report_is_NULL <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1071,9 +1071,9 @@ report_whether_is_null <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_number <- function(x, x_nm = NULL) {
+report_is_number <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1097,9 +1097,9 @@ report_whether_is_number <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_numeric <- function(x, x_nm = NULL) {
+report_is_numeric <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1123,9 +1123,9 @@ report_whether_is_numeric <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_of_length <- function(x, x_nm = NULL, expected_length) {
+report_is_of_length <- function(x, x_nm = NULL, expected_length) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1149,9 +1149,9 @@ report_whether_is_of_length <- function(x, x_nm = NULL, expected_length) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_uniquely_named <- function(x, x_nm = NULL) {
+report_is_uniquely_named <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1175,9 +1175,9 @@ report_whether_is_uniquely_named <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_uniquely_named_list <- function(x, x_nm = NULL) {
+report_is_uniquely_named_list <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1201,9 +1201,9 @@ report_whether_is_uniquely_named_list <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_is_vector <- function(x, x_nm = NULL) {
+report_is_vector <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
@@ -1227,9 +1227,9 @@ report_whether_is_vector <- function(x, x_nm = NULL) {
 
 
 # this function was generated automatically. do not edit by hand!
-#' @rdname report_whether
+#' @rdname assertions
 #' @export
-report_whether_vector_elems_are_in_set <- function(x, x_nm = NULL, set) {
+report_vector_elems_are_in_set <- function(x, x_nm = NULL, set) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(

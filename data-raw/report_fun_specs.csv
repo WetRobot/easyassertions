@@ -1,10 +1,10 @@
 test_set_nm;call;intra_function_action;fail_message;pass_message;extra_arg_nm_set
 
 dir_exists;assert_is_character_nonNA_vector(x);internal_assertion;%%result%%;NA;NA
-dir_exists;length(bad_dirs <- x[!file.exist(x)]) == 0L;report;no such directory/directories: ${bad_dirs};NA;NA
+dir_exists;length(bad_dirs <- x[!dir.exists(x)]) == 0L;report;no such directory/directories: ${bad_dirs};NA;NA
 
 file_exists;assert_is_character_nonNA_vector(x);internal_assertion;%%result%%;NA;NA
-file_exists;length(bad_files <- x[!file.exist(x)]) == 0L;report;no such file(s): ${bad_files};NA;NA
+file_exists;length(bad_files <- x[!file.exists(x)]) == 0L;report;no such file(s): ${bad_files};NA;NA
 
 is_number;is.numeric(x);report;NA;NA;NA
 is_numeric;is.numeric(x);report;NA;NA;NA
@@ -61,7 +61,7 @@ is_vector;is.null(dim(x));report;NA;NA;NA
 is_vector;!is.list(x);report;NA;NA;
 
 is_matrix;is.matrix(x);report;NA;NA;NA
-is_null;is.null(x);report;NA;NA;NA
+is_NULL;is.null(x);report;NA;NA;NA
 is_list;inherits(x, "list");report;NA;NA;NA
 is_named_list;inherits(x, "list");report;NA;NA;NA
 is_named_list;!is.null(names(x));report;NA;NA;NA
