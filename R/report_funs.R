@@ -19,7 +19,21 @@
 #'
 #' @param hi `[number]` (mandatory, no default)
 #' upper bound for `x`
+#' @param set `[any vector]` (mandatory, no default)
+#' set of values to compare to
+#' @param required_class `[character]` (mandatory, no default)
+#' class that object must have
+#' @param expected_length `[integer]` (mandatory, no default)
+#' length object must have
+#' @param required_names `[character]` (mandatory, no default)
+#' set of names object must have
+#' @param classes `[character]` (mandatory, no default)
+#' one or more classes; object must have at least one of these as class
+#' @param expected_levels `[character]` (mandatory, no default)
+#' set of levels factor is required to have
 #' @importFrom data.table between
+#'
+NULL
 
 
 #' @rdname assertions
@@ -35,7 +49,7 @@
 #'   of each function specified in `fun_nms`, and matching arguments are
 #'   used; e.g. if one fun has arg `y` and other has `z`, you may pass
 #'   `list(y = my_y, z = my_z)`.
-report_whether_is_one_of <- function(x, x_nm = NULL, fun_nms, funs_arg_list = NULL) {
+assert_is_one_of <- function(x, x_nm = NULL, fun_nms, funs_arg_list = NULL) {
   raise_internal_error_if_not(
     length(fun_nms) > 0,
     is.character(fun_nms),
@@ -71,10 +85,8 @@ report_whether_is_one_of <- function(x, x_nm = NULL, fun_nms, funs_arg_list = NU
     stop("at least one of the following assertions must pass:\n", error_msgs)
   }
 
-  return(report_df)
+  invisible(NULL)
 }
-
-
 
 
 

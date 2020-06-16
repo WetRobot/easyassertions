@@ -327,21 +327,7 @@ generate_assertion_funs <- function(
   )
 }
 
-#' @title Generate Assertions
-#' @description
-#' Generate code for a bunch of assertions functions.
-#' @importFrom data.table := CJ setkeyv
-#' @param source_script `[character]` (mandatory, no default)
-#'
-#' path to R script where your assertion functions are
-#' @param target_script `[character]` (mandatory, default `"assertions.R"`)
-#'
-#' path where generated code will be written
-#' @param pad `[character]` (mandatory, default `rep("", 5)`)
-#'
-#' lines between generated function definitions; by default 5 empty lines
-#' @export
-#' @importFrom data.table CJ setkeyv .SD
+#' @importFrom data.table .SD := CJ setkeyv
 generate_function_variants <- function(
   prefix = c("report", "assert", "test")[1],
   target_script = "R/generated_report_fun_variants.R",
@@ -395,7 +381,7 @@ generate_function_variants <- function(
     )
     def <- c(def, "}", rep("", 1))
     def <- c(
-      paste0("#' @rdname ", prefix),
+      "#' @rdname assertions",
       "#' @export",
       def
     )
