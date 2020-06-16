@@ -319,6 +319,32 @@ report_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
 # this function was generated automatically. do not edit by hand!
 #' @rdname assertions
 #' @export
+report_is_call <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  fun_eval_env <- environment()
+  test_set <- c(
+    "is.call(x)"
+  )
+  fail_msg_set <- c(
+    NA_character_
+  )
+  pass_msg_set <- c(
+    NA_character_
+  )
+  report_df <- tests_to_report(
+    tests = test_set,
+    fail_messages = fail_msg_set,
+    pass_messages = pass_msg_set,
+    env = fun_eval_env
+  )
+  return(report_df)
+}
+
+
+
+# this function was generated automatically. do not edit by hand!
+#' @rdname assertions
+#' @export
 report_is_character <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
@@ -579,6 +605,32 @@ report_is_environment <- function(x, x_nm = NULL) {
 # this function was generated automatically. do not edit by hand!
 #' @rdname assertions
 #' @export
+report_is_expression <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  fun_eval_env <- environment()
+  test_set <- c(
+    "is.expression(x)"
+  )
+  fail_msg_set <- c(
+    NA_character_
+  )
+  pass_msg_set <- c(
+    NA_character_
+  )
+  report_df <- tests_to_report(
+    tests = test_set,
+    fail_messages = fail_msg_set,
+    pass_messages = pass_msg_set,
+    env = fun_eval_env
+  )
+  return(report_df)
+}
+
+
+
+# this function was generated automatically. do not edit by hand!
+#' @rdname assertions
+#' @export
 report_is_factor <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
@@ -787,6 +839,32 @@ report_is_integer <- function(x, x_nm = NULL) {
 # this function was generated automatically. do not edit by hand!
 #' @rdname assertions
 #' @export
+report_is_language_object <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  fun_eval_env <- environment()
+  test_set <- c(
+    "is.language(x)"
+  )
+  fail_msg_set <- c(
+    NA_character_
+  )
+  pass_msg_set <- c(
+    NA_character_
+  )
+  report_df <- tests_to_report(
+    tests = test_set,
+    fail_messages = fail_msg_set,
+    pass_messages = pass_msg_set,
+    env = fun_eval_env
+  )
+  return(report_df)
+}
+
+
+
+# this function was generated automatically. do not edit by hand!
+#' @rdname assertions
+#' @export
 report_is_list <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
@@ -948,6 +1026,32 @@ report_is_matrix <- function(x, x_nm = NULL) {
   fun_eval_env <- environment()
   test_set <- c(
     "is.matrix(x)"
+  )
+  fail_msg_set <- c(
+    NA_character_
+  )
+  pass_msg_set <- c(
+    NA_character_
+  )
+  report_df <- tests_to_report(
+    tests = test_set,
+    fail_messages = fail_msg_set,
+    pass_messages = pass_msg_set,
+    env = fun_eval_env
+  )
+  return(report_df)
+}
+
+
+
+# this function was generated automatically. do not edit by hand!
+#' @rdname assertions
+#' @export
+report_is_name <- function(x, x_nm = NULL) {
+  x_nm <- handle_x_nm_arg(x_nm)
+  fun_eval_env <- environment()
+  test_set <- c(
+    "is.name(x)"
   )
   fail_msg_set <- c(
     NA_character_

@@ -12,11 +12,11 @@ asserted to adhere to specifications.
 \details{
 \code{dbc} offers the following families of functions:
 \itemize{
-\item \code{is_}: e.g. \code{is_integer_atom}; returns \code{TRUE} / \code{FALSE}
-\item \code{report_whether_}: e.g. \code{report_whether_integer_atom}; returns a
-\code{data.frame} with columns \code{test_name}, \code{test_result}, and \code{message};
+\item \code{test}: e.g. \code{test_is_integer_atom}; returns \code{TRUE} / \code{FALSE}
+\item \code{report_}: e.g. \code{report_is_integer_atom}; returns a
+\code{data.frame} with columns \code{test}, \code{result}, \code{pass}, and \code{message};
 failed test will have an associated error message
-\item \code{check_user_input_}: e.g. \code{check_user_input_is_integer_atom};
+\item \code{assert_user_input_}: e.g. \code{assert_user_input_is_integer_atom};
 these specifically check the values of function arguments supplied by the
 user and should not be used for other purposes; they emit
 a more user-friendly error so the user knows to adjust what they supply
@@ -45,9 +45,9 @@ if and only if \code{getOption("dbc_mode") == "dev"}.
 
 In summary, \code{assert_} functions are intended to check that something has
 not happened which should not happen (something is wrong with the function),
-\code{is_} functions return logical values, \code{report_whether_} return reports
-which can be used in more customised checking, and \code{check_user_input_}
-functions verify inputs given by the user. \code{check_user_input_} cannot know
+\code{test_} functions return logical values, \code{report_} return reports
+which can be used in more customised checking, and \code{assert_user_input_}
+functions verify inputs given by the user. \code{assert_user_input_} cannot know
 if it is in fact checking inputs not directly given by the user, i.e.
 the error messages will be poor if a function intended for the user is also
 used internally. To this end it is recommended to write a separate
@@ -69,7 +69,7 @@ my_fun <- function(x) \{
 \code{dbc} contains a plethora of (automatically generated) functions to reduce
 repetition, improve readability, and make writing checks easier (they are
 easy to write when you have auto-suggestions on your IDE, and start writing
-e.g. \code{assert_prod_input_number} and get a number of suggestions). These are
+e.g. \code{assert_prod_input_} and get a number of suggestions). These are
 recommended when they can be used. When not, use \code{report_on_tests} to
 create your own reports, and pass its output to one of
 \itemize{
@@ -85,7 +85,7 @@ create your own reports, and pass its output to one of
 e.g.\preformatted{my_fun <- function(x) \{
   signal_user_input_report(
     report_on_tests(
-      tests = list(x \%in\% 1:5),
+      tests = "x \%in\% 1:5",
       fail_messages = paste0("expected x to be in 1:5, but it was ", x)
     )
   )

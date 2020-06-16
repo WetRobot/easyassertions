@@ -16,6 +16,10 @@ is_Date;inherits(x, "Date");report;NA;NA;NA
 is_factor;is.factor(x);report;NA;NA;NA
 is_function;is.function(x);report;NA;NA;NA
 is_environment;is.environment(x);report;NA;NA;NA
+is_call;is.call(x);report;NA;NA;NA
+is_name;is.name(x);report;NA;NA;NA
+is_expression;is.expression(x);report;NA;NA;NA
+is_language_object;is.language(x);report;NA;NA;NA
 
 is_of_length;length(x) == expected_length;report;${x_nm} had length ${length(x)} instead of ${expected_length};NA;expected_length
 has_length;length(x) == expected_length;report;${x_nm} had length ${length(x)} instead of ${expected_length};NA;expected_length

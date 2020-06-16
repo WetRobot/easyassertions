@@ -14,6 +14,7 @@
 \alias{assert_is_atom}
 \alias{assert_is_between_exclusive}
 \alias{assert_is_between_inclusive}
+\alias{assert_is_call}
 \alias{assert_is_character}
 \alias{assert_is_character_atom}
 \alias{assert_is_character_matrix}
@@ -66,6 +67,7 @@
 \alias{assert_is_double_nonNA_vector}
 \alias{assert_is_double_vector}
 \alias{assert_is_environment}
+\alias{assert_is_expression}
 \alias{assert_is_factor}
 \alias{assert_is_factor_atom}
 \alias{assert_is_factor_matrix}
@@ -110,6 +112,7 @@
 \alias{assert_is_integer_nonNA_matrix}
 \alias{assert_is_integer_nonNA_vector}
 \alias{assert_is_integer_vector}
+\alias{assert_is_language_object}
 \alias{assert_is_list}
 \alias{assert_is_logical}
 \alias{assert_is_logical_atom}
@@ -123,6 +126,7 @@
 \alias{assert_is_ltezero}
 \alias{assert_is_ltzero}
 \alias{assert_is_matrix}
+\alias{assert_is_name}
 \alias{assert_is_named}
 \alias{assert_is_named_list}
 \alias{assert_is_nonNA}
@@ -176,6 +180,7 @@
 \alias{report_is_atom}
 \alias{report_is_between_exclusive}
 \alias{report_is_between_inclusive}
+\alias{report_is_call}
 \alias{report_is_character}
 \alias{report_is_data.frame}
 \alias{report_is_data.frame_with_required_names}
@@ -186,6 +191,7 @@
 \alias{report_is_Date}
 \alias{report_is_double}
 \alias{report_is_environment}
+\alias{report_is_expression}
 \alias{report_is_factor}
 \alias{report_is_factor_with_levels}
 \alias{report_is_function}
@@ -194,6 +200,7 @@
 \alias{report_is_gtezero}
 \alias{report_is_gtzero}
 \alias{report_is_integer}
+\alias{report_is_language_object}
 \alias{report_is_list}
 \alias{report_is_logical}
 \alias{report_is_lt}
@@ -201,6 +208,7 @@
 \alias{report_is_ltezero}
 \alias{report_is_ltzero}
 \alias{report_is_matrix}
+\alias{report_is_name}
 \alias{report_is_named}
 \alias{report_is_named_list}
 \alias{report_is_nonNA}
@@ -224,6 +232,7 @@
 \alias{test_is_atom}
 \alias{test_is_between_exclusive}
 \alias{test_is_between_inclusive}
+\alias{test_is_call}
 \alias{test_is_character}
 \alias{test_is_character_atom}
 \alias{test_is_character_matrix}
@@ -276,6 +285,7 @@
 \alias{test_is_double_nonNA_vector}
 \alias{test_is_double_vector}
 \alias{test_is_environment}
+\alias{test_is_expression}
 \alias{test_is_factor}
 \alias{test_is_factor_atom}
 \alias{test_is_factor_matrix}
@@ -320,6 +330,7 @@
 \alias{test_is_integer_nonNA_matrix}
 \alias{test_is_integer_nonNA_vector}
 \alias{test_is_integer_vector}
+\alias{test_is_language_object}
 \alias{test_is_list}
 \alias{test_is_logical}
 \alias{test_is_logical_atom}
@@ -333,6 +344,7 @@
 \alias{test_is_ltezero}
 \alias{test_is_ltzero}
 \alias{test_is_matrix}
+\alias{test_is_name}
 \alias{test_is_named}
 \alias{test_is_named_list}
 \alias{test_is_nonNA}
@@ -401,6 +413,8 @@ assert_is_atom(x, x_nm = NULL)
 assert_is_between_exclusive(x, x_nm = NULL, lo, hi)
 
 assert_is_between_inclusive(x, x_nm = NULL, lo, hi)
+
+assert_is_call(x, x_nm = NULL)
 
 assert_is_character(x, x_nm = NULL)
 
@@ -506,6 +520,8 @@ assert_is_double_vector(x, x_nm = NULL)
 
 assert_is_environment(x, x_nm = NULL)
 
+assert_is_expression(x, x_nm = NULL)
+
 assert_is_factor(x, x_nm = NULL)
 
 assert_is_factor_atom(x, x_nm = NULL)
@@ -594,6 +610,8 @@ assert_is_integer_nonNA_vector(x, x_nm = NULL)
 
 assert_is_integer_vector(x, x_nm = NULL)
 
+assert_is_language_object(x, x_nm = NULL)
+
 assert_is_list(x, x_nm = NULL)
 
 assert_is_logical(x, x_nm = NULL)
@@ -619,6 +637,8 @@ assert_is_ltezero(x, x_nm = NULL)
 assert_is_ltzero(x, x_nm = NULL)
 
 assert_is_matrix(x, x_nm = NULL)
+
+assert_is_name(x, x_nm = NULL)
 
 assert_is_named(x, x_nm = NULL)
 
@@ -726,6 +746,8 @@ report_is_between_exclusive(x, x_nm = NULL, lo, hi)
 
 report_is_between_inclusive(x, x_nm = NULL, lo, hi)
 
+report_is_call(x, x_nm = NULL)
+
 report_is_character(x, x_nm = NULL)
 
 report_is_data.frame(x, x_nm = NULL)
@@ -746,6 +768,8 @@ report_is_double(x, x_nm = NULL)
 
 report_is_environment(x, x_nm = NULL)
 
+report_is_expression(x, x_nm = NULL)
+
 report_is_factor(x, x_nm = NULL)
 
 report_is_factor_with_levels(x, x_nm = NULL, expected_levels)
@@ -762,6 +786,8 @@ report_is_gtzero(x, x_nm = NULL)
 
 report_is_integer(x, x_nm = NULL)
 
+report_is_language_object(x, x_nm = NULL)
+
 report_is_list(x, x_nm = NULL)
 
 report_is_logical(x, x_nm = NULL)
@@ -775,6 +801,8 @@ report_is_ltezero(x, x_nm = NULL)
 report_is_ltzero(x, x_nm = NULL)
 
 report_is_matrix(x, x_nm = NULL)
+
+report_is_name(x, x_nm = NULL)
 
 report_is_named(x, x_nm = NULL)
 
@@ -821,6 +849,8 @@ test_is_atom(x, x_nm = NULL)
 test_is_between_exclusive(x, x_nm = NULL, lo, hi)
 
 test_is_between_inclusive(x, x_nm = NULL, lo, hi)
+
+test_is_call(x, x_nm = NULL)
 
 test_is_character(x, x_nm = NULL)
 
@@ -926,6 +956,8 @@ test_is_double_vector(x, x_nm = NULL)
 
 test_is_environment(x, x_nm = NULL)
 
+test_is_expression(x, x_nm = NULL)
+
 test_is_factor(x, x_nm = NULL)
 
 test_is_factor_atom(x, x_nm = NULL)
@@ -1014,6 +1046,8 @@ test_is_integer_nonNA_vector(x, x_nm = NULL)
 
 test_is_integer_vector(x, x_nm = NULL)
 
+test_is_language_object(x, x_nm = NULL)
+
 test_is_list(x, x_nm = NULL)
 
 test_is_logical(x, x_nm = NULL)
@@ -1039,6 +1073,8 @@ test_is_ltezero(x, x_nm = NULL)
 test_is_ltzero(x, x_nm = NULL)
 
 test_is_matrix(x, x_nm = NULL)
+
+test_is_name(x, x_nm = NULL)
 
 test_is_named(x, x_nm = NULL)
 

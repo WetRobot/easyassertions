@@ -246,7 +246,7 @@ generate_report_derivative_funs <- function(
       "x_nm <- handle_x_nm_arg(x_nm)",
       paste0("report_fun_nm <- \"", fun_df[["report_fun_nm"]][fun_no], "\""),
       "arg_list <- mget(names(formals(report_fun_nm)))",
-      "report_df <- do.call(report_fun_nm, arg_list)",
+      "report_df <- call_with_arg_list(report_fun_nm, arg_list)",
       body_part
     ))
   })

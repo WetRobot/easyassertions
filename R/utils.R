@@ -40,3 +40,49 @@ raise_internal_error_if_not <- function(...) {
 
 
 
+call_with_arg_list <- function(
+  fun,
+  arg_list,
+  envir = parent.frame(1L)
+) {
+  stopifnot(
+    inherits(arg_list, "list"),
+    is.environment(envir)
+  )
+  match.fun(fun)
+  UseMethod("call_with_arg_list")
+}
+
+call_with_arg_list.function <- function(
+  fun,
+  arg_list,
+  envir = parent.frame(1L)
+) {
+  call_env <- new.env(parent = envir)
+  call <- quote(fun())
+  for (arg_nm in names(arg_list)) {
+    tmp_arg_nm <- paste0("._", arg_nm)
+    call[[arg_nm]] <- parse(text = tmp_arg_nm)[[1L]]
+    call_env[[tmp_arg_nm]] <- arg_list[[arg_nm]]
+  }
+  call_env[["fun"]] <- fun
+  eval(expr = call, envir = call_env)
+}
+
+call_with_arg_list.character <- function(
+  fun,
+  arg_list,
+  envir = parent.frame(1L)
+) {
+  call_env <- new.env(parent = envir)
+  call <- parse(text = paste(fun, "()"))[[1L]]
+  for (arg_nm in names(arg_list)) {
+    tmp_arg_nm <- paste0("._", arg_nm)
+    call[[arg_nm]] <- parse(text = tmp_arg_nm)[[1L]]
+    call_env[[tmp_arg_nm]] <- arg_list[[arg_nm]]
+  }
+  call_env[[fun]] <- match.fun(fun)
+  eval(expr = call, envir = call_env)
+}
+
+
