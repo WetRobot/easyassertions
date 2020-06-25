@@ -271,7 +271,7 @@ report_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = FALSE))) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!dbc::is_between_exclusive(x = x, lo = lo, hi = hi))) == 0L" )
   )
   fail_msg_set <- c(
     c(NA, NA, NA, "${n_outside} elements were outside exclusive bounds ${lo}, ${hi}" )
@@ -297,7 +297,7 @@ report_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = TRUE))) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!dbc::is_between_inclusive(x = x, lo = lo, hi = hi))) == 0L" )
   )
   fail_msg_set <- c(
     c(NA, NA, NA, "${n_outside} elements were outside inclusive bounds ${lo}, ${hi}" )

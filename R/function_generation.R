@@ -130,12 +130,12 @@ tests_to_report <- function(
     "test passed: ", tests[is.na(pass_messages)]
   )
 
-  eval_env <- new.env(parent = env)
   test_pos_set <- seq_along(tests)
   do.call(rbind, lapply(test_pos_set, function(test_pos) {
     test_string <- tests[test_pos]
     test_expr <- parse(text = test_string)[[1L]]
 
+    eval_env <- new.env(parent = env)
     result <- tryCatch(
       eval(test_expr, envir = eval_env),
       error = function(e) e
@@ -172,7 +172,14 @@ tests_to_report <- function(
     if (df[["pass"]]) {
       df[["message"]] <- interpolate(pass_messages[test_pos], env = eval_env)
     } else {
-      df[["message"]] <- interpolate(fail_messages[test_pos], env = eval_env)
+      msg <- tryCatch(
+        interpolate(fail_messages[test_pos], env = eval_env),
+        error = function(e) e
+      )
+      if (inherits(msg, "error")) {
+        browser()
+      }
+      df[["message"]] <- msg
     }
     df[]
   }))
@@ -493,13 +500,12 @@ generate_assertion_funs <- function(
   )
 }
 
-#' @importFrom data.table .SD := CJ setkeyv
 generate_function_variants <- function(
   prefix = c("report", "assert", "test")[1],
   target_script = "R/generated_report_fun_variants.R",
   pad = rep("", 5)
 ) {
-
+  requireNamespace("data.table")
   levels <- list(
     c("double", "number", "integer", "Date", "character", "logical",  "factor"),
     "_",
@@ -523,14 +529,17 @@ generate_function_variants <- function(
   fun_nms <- paste0(fun_def_prefix, fun_nms)
   fun_nms <- gsub("_{1,}", "_", fun_nms)
 
-  fun_nm_dt[, c("V2", "V4", "V6") := NULL]
-  fun_nm_dt[, names(fun_nm_dt) := lapply(.SD, function(col) {
-    fun_nms <- paste0(fun_def_prefix, col)
-    fun_calls <- paste0(fun_nms, "(x = x, x_nm = x_nm)")
-    fun_calls[col == ""] <- ""
-    fun_calls
-  })]
-
+  data.table::set(fun_nm_dt, j = c("V2", "V4", "V6"), value = NULL)
+  data.table::set(
+    fun_nm_dt,
+    j = names(fun_nm_dt),
+    value = lapply(fun_nm_dt, function(col) {
+      fun_nms <- paste0(fun_def_prefix, col)
+      fun_calls <- paste0(fun_nms, "(x = x, x_nm = x_nm)")
+      fun_calls[col == ""] <- ""
+      fun_calls
+    })
+  )
 
   fun_definitions <- unlist(lapply(seq_along(fun_nms), function(i) {
     fun_nm <- fun_nms[i]

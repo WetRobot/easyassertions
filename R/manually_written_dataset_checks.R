@@ -58,7 +58,7 @@ identify_invalid_observations <- function(
     NULL
   }))
 
-  return(result_dt[])
+  return(result_df[])
 }
 
 

@@ -95,12 +95,12 @@ is_nonNA;(n_na <- sum(is.na(x))) == 0L;report;${x_nm} had ${n_na} NA values - no
 is_between_inclusive;assert_is_number_nonNA_vector(x);internal_assertion;NA;NA;lo, hi
 is_between_inclusive;assert_is_number_nonNA_vector(lo);internal_assertion;NA;NA;lo, hi
 is_between_inclusive;assert_is_number_nonNA_vector(hi);internal_assertion;NA;NA;lo, hi
-is_between_inclusive;(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = TRUE))) == 0L;report;${n_outside} elements were outside inclusive bounds ${lo}, ${hi};NA;lo, hi
+is_between_inclusive;(n_outside <- sum(!dbc::is_between_inclusive(x = x, lo = lo, hi = hi))) == 0L;report;${n_outside} elements were outside inclusive bounds ${lo}, ${hi};NA;lo, hi
 
 is_between_exclusive;assert_is_number_nonNA_vector(x);internal_assertion;NA;NA;lo, hi
 is_between_exclusive;assert_is_number_nonNA_vector(lo);internal_assertion;NA;NA;lo, hi
 is_between_exclusive;assert_is_number_nonNA_vector(hi);internal_assertion;NA;NA;lo, hi
-is_between_exclusive;(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = FALSE))) == 0L;report;${n_outside} elements were outside exclusive bounds ${lo}, ${hi};NA;lo, hi
+is_between_exclusive;(n_outside <- sum(!dbc::is_between_exclusive(x = x, lo = lo, hi = hi))) == 0L;report;${n_outside} elements were outside exclusive bounds ${lo}, ${hi};NA;lo, hi
 
 is_gte;assert_is_number_nonNA_vector(x);internal_assertion;NA;NA;lo
 is_gte;(n_fail <- sum(x < lo)) == 0L;report;${n_fail} elements were < ${lo};NA;lo
