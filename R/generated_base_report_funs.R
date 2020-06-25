@@ -271,10 +271,10 @@ report_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!dbc::is_between_exclusive(x = x, lo = lo, hi = hi))) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "!dbc::is_between_exclusive(x = x, lo = lo, hi = hi)" )
   )
   fail_msg_set <- c(
-    c(NA, NA, NA, "${n_outside} elements were outside exclusive bounds ${lo}, ${hi}" )
+    c(NA, NA, NA, "${n_fail} elements were outside exclusive bounds ${lo}, ${hi}" )
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_, NA_character_, NA_character_)
@@ -297,10 +297,10 @@ report_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!dbc::is_between_inclusive(x = x, lo = lo, hi = hi))) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "dbc::is_between_inclusive(x = x, lo = lo, hi = hi)" )
   )
   fail_msg_set <- c(
-    c(NA, NA, NA, "${n_outside} elements were outside inclusive bounds ${lo}, ${hi}" )
+    c(NA, NA, NA, "${n_fail} elements were outside inclusive bounds ${lo}, ${hi}" )
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_, NA_character_, NA_character_)
@@ -713,7 +713,7 @@ report_is_gt <- function(x, x_nm = NULL, lo) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x <= lo)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x > lo")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were <= ${lo}")
@@ -739,7 +739,7 @@ report_is_gte <- function(x, x_nm = NULL, lo) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x < lo)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x >= lo")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were < ${lo}")
@@ -765,7 +765,7 @@ report_is_gtezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x < 0)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x >= 0")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were < 0")
@@ -791,7 +791,7 @@ report_is_gtzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x <= 0)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x > 0")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were <= 0}")
@@ -921,7 +921,7 @@ report_is_lt <- function(x, x_nm = NULL, lo, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x >= hi)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x < hi")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were >= ${hi}")
@@ -947,7 +947,7 @@ report_is_lte <- function(x, x_nm = NULL, hi) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x > hi)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x <= hi")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were > ${hi}")
@@ -973,7 +973,7 @@ report_is_ltezero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x > 0)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x <= 0")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were > 0")
@@ -999,7 +999,7 @@ report_is_ltzero <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x >= 0)) == 0L" )
+    c("assert_is_number_nonNA_vector(x)", "x < 0")
   )
   fail_msg_set <- c(
     c(NA, "${n_fail} elements were >= 0")
@@ -1129,10 +1129,10 @@ report_is_nonNA <- function(x, x_nm = NULL) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    "(n_na <- sum(is.na(x))) == 0L"
+    "!is.na(x)"
   )
   fail_msg_set <- c(
-    "${x_nm} had ${n_na} NA values - none are allowed"
+    "${x_nm} had ${n_fail} NA values - none are allowed"
   )
   pass_msg_set <- c(
     NA_character_
