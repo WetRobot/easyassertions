@@ -3,32 +3,126 @@
 
 
 
+#' @title Tests to Reports to Assertions
+#' @description
+#' Collect tests into a report data.frame, raise assertion errors in failed
+#' tests in report.
+#' @name tests_to_reports_to_assertions
+NULL
+
+#' @rdname tests_to_reports_to_assertions
+#' @export
+#' @param tests `[character]` (mandatory, no default)
+#'
+#' character string vector of tests to perform; after parsing each string
+#' the evaluated expression must return a logical vector or `NULL`,
+#' where `NULL` is interpreted as pass
+#' @param fail_messages `[NULL, character]` (optional, default `NULL`)
+#'
+#' - `NULL`: use `"at least one FALSE value in test: ${test}"`
+#' - `character`: use these messages (one for each test); `NA_character_`
+#'   values are replaced with the same message as when this argument is
+#'   `NULL`
+#'
+#' messages (one for each test) to include in report upon failure; see section
+#' **Interpolation in messages**
+#' @param pass_messages `[NULL, character]` (optional, default `NULL`)
+#'
+#' - `NULL`: use `"all were TRUE in test: ${test}"`
+#' - `character`: use these messages (one for each test); `NA_character_`
+#'   values are replaced with the same message as when this argument is
+#'   `NULL`
+#'
+#' as `fail_messages` but for tests successes
+#' @param env `[environment]` (optional, default `parent.frame(1L)`)
+#'
+#' a new environment is created for evaluating each test given in `tests`;
+#' this environment will be the parent environment of each of the temporary
+#' environments; the default is the parent environment of the function execution
+#' environment
+#'
+#' @section Interpolation in messages:
+#' `fail_messages` and `pass_messages` can use variables you create in a test
+#' and information created based on the result of the test. For an individual
+#' message, you may include any of the variables listed in **Value** for that
+#' test except the message itself by using the syntax `${object}` in your
+#' test string; e.g. `"this many failed: ${n_fail}"`. You may include any
+#' variables you created in the test, using the same logic, e.g. with test
+#' `"(len <- length(x)) == 1L"` you may do `"expected length 1, got ${len}"`.
+#' Finding variables to interpolate into the string is searched for in the
+#' set of variables created in your test first and then in the variables
+#' derived from the result of the test.
+#'
+#' @return
+#' For `tests_to_report`, a `data.frame` with columns
+#'
+#' - `test`: argument `tests` as-is
+#' - `error`: the error message if the test resulted in an error; `NA` if it
+#'   did not
+#' - `pass`: `TRUE` if corresponding test evaluated to logical and all were
+#'   `TRUE`, otherwise `FALSE` (i.e. any `NA` values leads to `FALSE`)
+#' - `n_fail`: number of elements of result of test that were `FALSE` or `NA`;
+#'   if result was not a logical vector of length greater than one, this is `NA`
+#' - `wh_fail`: integer vector of positions of test result that were `FALSE`
+#'   or `NA`; if result was not a logical vector of length greater than one,
+#'   this is `NA`
+#' - `message`: the corresponding `fail_messages` or `pass_messages`
+#'   element (after interpolation) depending on `pass`
+#'
+#' @examples
+#' # tests_to_report
+#'
+#' a <- 1:5
+#' b <- 1:5
+#' # pass
+#' tests_to_report(
+#'   tests = "a == b"
+#' )
+#' # fail
+#' tests_to_report(
+#'   tests = "a == (b + 1)"
+#' )
+#' # error
+#' tests_to_report(
+#'   tests = "a == c"
+#' )
 tests_to_report <- function(
   tests,
-  fail_messages = "test was not TRUE: %%test%%",
-  pass_messages = "test was TRUE: %%test%%",
+  fail_messages = NULL,
+  pass_messages = NULL,
   env = parent.frame(1L)
 ) {
+
   stopifnot(
     is.character(tests),
     length(tests) > 0L,
     !is.na(tests),
 
-    is.character(fail_messages),
-    length(fail_messages) %in% c(1L, length(tests)),
+    is.null(fail_messages) || (
+      is.character(fail_messages) &&
+        length(fail_messages) %in% c(1L, length(tests))
+    ),
 
-    is.character(pass_messages),
-    length(pass_messages) %in% c(1L, length(tests)),
+    is.null(pass_messages) || (
+      is.character(pass_messages) &&
+        length(pass_messages) %in% c(1L, length(tests))
+    ),
 
     is.environment(env)
   )
 
+  if (is.null(fail_messages)) {
+    fail_messages <- "at least one FALSE value in test: ${test}"
+  }
   if (length(fail_messages) == 1L) {
     fail_messages <- rep(fail_messages, length(tests))
   }
   fail_messages[is.na(fail_messages)] <- paste0(
     "test failed: ", tests[is.na(fail_messages)]
   )
+  if (is.null(pass_messages)) {
+    pass_messages <- "all were TRUE in test: ${test}"
+  }
   if (length(pass_messages) == 1L) {
     pass_messages <- rep(pass_messages, length(tests))
   }
@@ -42,33 +136,105 @@ tests_to_report <- function(
     test_string <- tests[test_pos]
     test_expr <- parse(text = test_string)[[1L]]
 
-    eval(test_expr, envir = eval_env)
-    result <- withCallingHandlers(
+    result <- tryCatch(
       eval(test_expr, envir = eval_env),
-      error = function(e) {
-        paste0(
-          "ERROR: ", e[["message"]], collapse = ""
-        )
-      }
+      error = function(e) e
     )
-    if (is.null(result)) {
-      result <- TRUE
+    pass <- FALSE
+    error <- NA_character_
+    n_fail <- NA_integer_
+    wh_fail <- NA_integer_
+    if (inherits(result, "error")) {
+      error <- result[["message"]]
+    } else if (is.null(result)) {
+      pass <- TRUE
+    } else if (is.logical(result)) {
+      pass <- all(result %in% TRUE)
+      if (length(result) != 1L) {
+        n_fail <- sum(!result, na.rm = TRUE)
+        wh_fail <- which(!result)
+      }
+    } else {
+      stop("test ", deparse(test_string), " returned result of class(es) ",
+           deparse(class(result)), "; logical or NULL was expected; see ",
+           "help for argument 'tests'")
     }
-
     df <- data.frame(
       test = test_string,
-      result = result,
-      pass = isTRUE(all.equal(result, TRUE))
+      error = error,
+      pass = pass,
+      n_fail = n_fail
     )
+    df[["wh_fail"]] <- list(wh_fail)
+    df_env <- as.environment(df)
+    parent.env(df_env) <- parent.env(eval_env)
+    parent.env(eval_env) <- df_env
     if (df[["pass"]]) {
       df[["message"]] <- interpolate(pass_messages[test_pos], env = eval_env)
     } else {
       df[["message"]] <- interpolate(fail_messages[test_pos], env = eval_env)
     }
-    df[["message"]] <- gsub("\\Q%%test%%\\E", df[["test"]], df[["message"]])
-    df[["message"]] <- gsub("\\Q%%result%%\\E", df[["result"]], df[["message"]])
     df[]
   }))
+}
+
+
+
+
+#' @rdname tests_to_reports_to_assertions
+#' @export
+#' @param report_df `[data.frame]` (mandatory, no default)
+#'
+#' a report `data.frame` as returned by `tests_to_report`
+#' @examples
+#' # report to assertion
+#'
+#' # pass
+#' report_df <- tests_to_report("1 == 1")
+#' report_to_assertion(report_df)
+#'
+#' # fail
+#' report_df <- tests_to_report("1 == 2")
+#' tryCatch(
+#'   report_to_assertion(report_df),
+#'   error = function(e) e
+#' )
+#'
+#' # 2 passes, 2 failures
+#' report_df <- tests_to_report(c("1 == 2", "1 == 1", "2 == 2", "2 == 1"))
+#' tryCatch(
+#'   report_to_assertion(report_df),
+#'   error = function(e) e
+#' )
+report_to_assertion <- function(report_df) {
+  stopifnot(
+    is.data.frame(report_df),
+    c("pass", "message", "error") %in% names(report_df)
+  )
+
+  wh_nonpass <- which(!report_df[["pass"]] %in% TRUE)
+  if (length(wh_nonpass) > 0L) {
+    msgs <- vapply(
+      wh_nonpass,
+      function(test_no) {
+        suffix <- paste0("failed: ", report_df[["message"]][test_no])
+        error_msg <- report_df[["error"]][test_no]
+        if (!is.na(error_msg)) {
+          suffix <- paste0("encountered an ERROR: ", error_msg)
+        }
+        paste0("test ", deparse(report_df[["test"]][test_no]), " ", suffix)
+      },
+      character(1L)
+    )
+    msg <- paste0(
+      c("assertion failure(s):",
+        paste0(" - ", msgs)),
+      collapse = "\n"
+    )
+    stop(msg)
+  }
+
+  return(invisible(NULL))
 }
 
 

@@ -40,7 +40,7 @@ report_dir_exists <- function(x, x_nm = NULL) {
     c("assert_is_character_nonNA_vector(x)", "length(bad_dirs <- x[!dir.exists(x)]) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "no such directory/directories: ${bad_dirs}")
+    c(NA, "no such directory/directories: ${bad_dirs}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -66,7 +66,7 @@ report_file_exists <- function(x, x_nm = NULL) {
     c("assert_is_character_nonNA_vector(x)", "length(bad_files <- x[!file.exists(x)]) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "no such file(s): ${bad_files}")
+    c(NA, "no such file(s): ${bad_files}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -274,7 +274,7 @@ report_is_between_exclusive <- function(x, x_nm = NULL, lo, hi) {
     c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = FALSE))) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "%%result%%", "%%result%%", "${n_outside} elements were outside exclusive bounds ${lo}, ${hi}" )
+    c(NA, NA, NA, "${n_outside} elements were outside exclusive bounds ${lo}, ${hi}" )
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_, NA_character_, NA_character_)
@@ -300,7 +300,7 @@ report_is_between_inclusive <- function(x, x_nm = NULL, lo, hi) {
     c("assert_is_number_nonNA_vector(x)", "assert_is_number_nonNA_vector(lo)",  "assert_is_number_nonNA_vector(hi)", "(n_outside <- sum(!data.table::between(x = x, lower = lo, upper = hi, incbounds = TRUE))) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "%%result%%", "%%result%%", "${n_outside} elements were outside inclusive bounds ${lo}, ${hi}" )
+    c(NA, NA, NA, "${n_outside} elements were outside inclusive bounds ${lo}, ${hi}" )
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_, NA_character_, NA_character_)
@@ -716,7 +716,7 @@ report_is_gt <- function(x, x_nm = NULL, lo) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x <= lo)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were <= ${lo}")
+    c(NA, "${n_fail} elements were <= ${lo}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -742,7 +742,7 @@ report_is_gte <- function(x, x_nm = NULL, lo) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x < lo)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were < ${lo}")
+    c(NA, "${n_fail} elements were < ${lo}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -768,7 +768,7 @@ report_is_gtezero <- function(x, x_nm = NULL) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x < 0)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were < 0")
+    c(NA, "${n_fail} elements were < 0")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -794,7 +794,7 @@ report_is_gtzero <- function(x, x_nm = NULL) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x <= 0)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were <= 0}")
+    c(NA, "${n_fail} elements were <= 0}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -924,7 +924,7 @@ report_is_lt <- function(x, x_nm = NULL, lo, hi) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x >= hi)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were >= ${hi}")
+    c(NA, "${n_fail} elements were >= ${hi}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -950,7 +950,7 @@ report_is_lte <- function(x, x_nm = NULL, hi) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x > hi)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were > ${hi}")
+    c(NA, "${n_fail} elements were > ${hi}")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -976,7 +976,7 @@ report_is_ltezero <- function(x, x_nm = NULL) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x > 0)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were > 0")
+    c(NA, "${n_fail} elements were > 0")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -1002,7 +1002,7 @@ report_is_ltzero <- function(x, x_nm = NULL) {
     c("assert_is_number_nonNA_vector(x)", "(n_fail <- sum(x >= 0)) == 0L" )
   )
   fail_msg_set <- c(
-    c("%%result%%", "${n_fail} elements were >= 0")
+    c(NA, "${n_fail} elements were >= 0")
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
@@ -1337,10 +1337,10 @@ report_vector_elems_are_in_set <- function(x, x_nm = NULL, set) {
   x_nm <- handle_x_nm_arg(x_nm)
   fun_eval_env <- environment()
   test_set <- c(
-    c("assert_is_vector(x)", "length(bad_values <- setdiff(x, set)) == 0L" )
+    c("assert_is_vector(x)", "x %in% set")
   )
   fail_msg_set <- c(
-    c(NA, "some values of ${x_nm} were not in set of expected values (first ten bad values): ${deparse(utils::head(bad_values, 10L))}" )
+    c(NA, "some values of ${x_nm} were not in set of expected values (first ten bad values): ${deparse(utils::head(unique(x[!x %in% set]), 10L))}" )
   )
   pass_msg_set <- c(
     c(NA_character_, NA_character_)
